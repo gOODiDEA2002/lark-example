@@ -10,14 +10,14 @@ variables:
 build:
   script:
     - build.sh
+    - export dir=$(pwd)
+    - cp $dir/$MODULE_API_NAME/target/*.jar $dir/$MODULE_API_NAME/dist/
   artifacts:
-    paths:
-      - target/*.jar
     expire_in: 2 hrs
 
 package:
   script:
     - export dir=$(pwd)
-    - echo $dir/$MODULE_API_NAME/target
-    - cd $dir/$MODULE_API_NAME/target
+    - echo $dir/$MODULE_API_NAME/dist
+    - cd $dir/$MODULE_API_NAME/dist
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
