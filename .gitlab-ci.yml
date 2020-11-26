@@ -1,19 +1,11 @@
-stages:
-  - build
+include:
+  - project: 'devops/ci-templates'
+    file: '/build/java.build.gitlab-ci.yml'
 
 variables:
-  REGISTRY_ADDRESS: "192.168.99.91:8080"
-
-before_script:
-  - export COMMIT_SHA=${CI_COMMIT_SHA:0:8}
+  REGISTRY_ADDRESS: 192.168.99.91:8080
 
 build:
-  image: $REGISTRY_ADDRESS/ci/java-build:1.0.0
-  stage: build
   script:
-    - echo $project.port
-    - build.sh
-  artifacts:
-    expire_in: 1 hrs
-  tags:
-    - java-build
+    - echo $CI_APPLICATION_REPOSITORY
+    - echo $CI_PROJECT_PATH
