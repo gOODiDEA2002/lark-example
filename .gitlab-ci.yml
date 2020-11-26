@@ -11,7 +11,7 @@ build:
   script:
     - build.sh
     - export dir=$(pwd)
-    - cp $dir/$MODULE_API_NAME/target/*.jar $dir/$MODULE_API_NAME/dist/
+    - cp $dir/$MODULE_API_NAME/target/*.jar $dir/$MODULE_API_NAME/dist
   artifacts:
     expire_in: 2 hrs
 
