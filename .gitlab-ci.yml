@@ -1,11 +1,13 @@
 include:
   - project: 'devops/ci-templates'
-    file: '/build/java.build.gitlab-ci.yml'
+    file: '/java.build.gitlab-ci.yml'
 
 variables:
   REGISTRY_ADDRESS: 192.168.99.91:8080
+  DOCKER_PROJECT_DIST_PATH: $CI_PROJECT_NAME
+  MODULE_API_NAME: lark-example-api
 
-build:
+package:
   script:
-    - build.sh
-    - echo "$CI_PROJECT_PATH build done"
+    - cd $dir/dist/$MODULE_API_NAME
+    - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA

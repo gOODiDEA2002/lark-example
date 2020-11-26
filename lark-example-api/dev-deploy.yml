@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lark-example-api-svc
+  namespace: lark-ns
+  labels:
+    module: lark-example
+    module_type: api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1001
+  selector:
+    app: lark-example-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lark-example-api
+  namespace: lark-ns
+  labels:
+    module: lark-example
+    module_type: api
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: lark-example-api
+  template:
+    metadata:
+      labels:
+        app: lark-example-api
+    spec:
+      containers:
+        - name: lark-example-api
+          image: 192.168.99.91:8080/lark/lark-example-api:latest
+          args: ["--spring.profiles.active=dev"]
+          env:
+            - name: JAVA_OPTS
+              value: "-server -Xms512m -Xmx512m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError"
+          ports:
+            - containerPort: 1001
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 1001
+            initialDelaySeconds: 180
+            timeoutSeconds: 180
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 1001
+            initialDelaySeconds: 180
+            timeoutSeconds: 180
+            periodSeconds: 60
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: harbor-registry-secret

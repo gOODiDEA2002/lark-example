@@ -1,9 +1,6 @@
-FROM java:8-jdk-alpine
-LABEL module_name="lark-example" module_type="api"
-RUN  apk add -U tzdata && \
-     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-COPY ./target/lark-example-api-1.0.0-SNAPSHOT.jar /opt/app.jar
-COPY entrypoint.sh /opt/entrypoint.sh
-
+#COPY ./target/lark-example-api-1.0.0-SNAPSHOT.jar /opt/app.jar
+FROM 192.168.99.91:8080/devops/java-run
+# ARG JAR_FILE
+ADD app.jar /
 EXPOSE 1001
 ENTRYPOINT ["/bin/sh", "/opt/entrypoint.sh"]
