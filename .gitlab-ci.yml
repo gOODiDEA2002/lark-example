@@ -1,6 +1,6 @@
 include:
   - project: 'devops/ci-templates'
-    file: '/java.build.gitlab-ci.yml'
+    file: '/build/java.build.gitlab-ci.yml'
 
 variables:
   REGISTRY_ADDRESS: 192.168.99.91:8080
