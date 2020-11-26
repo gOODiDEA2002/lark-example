@@ -2,7 +2,7 @@ stages:
   - build
 
 variables:
-  REGISTRY_ADDRESS: "http://192.168.99.91:8080"
+  REGISTRY_ADDRESS: "192.168.99.91:8080"
 
 before_script:
   - export COMMIT_SHA=${CI_COMMIT_SHA:0:8}
