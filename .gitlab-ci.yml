@@ -20,6 +20,6 @@ build:
 package:
   script:
     - export dir=$(pwd)
-    - echo $dir/$MODULE_API_NAME/dist
-    - cd $dir/$MODULE_API_NAME/dist
+    - echo $dir/$MODULE_API_NAME/target
+    - cd $dir/$MODULE_API_NAME/target
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
