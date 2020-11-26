@@ -13,7 +13,7 @@ build:
   artifacts:
     paths:
       - target/*.jar
-    expire_in: 1 hrs
+    expire_in: 2 hrs
 
 package:
   script:
