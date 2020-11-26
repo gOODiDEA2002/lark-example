@@ -13,6 +13,8 @@ build:
     - export dir=$(pwd)
     - cp $dir/$MODULE_API_NAME/target/*.jar $dir/$MODULE_API_NAME/dist
   artifacts:
+    paths:
+      - $MODULE_API_NAME/target/*.jar
     expire_in: 1 hrs
 
 package:
