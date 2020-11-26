@@ -8,3 +8,4 @@ variables:
 build:
   script:
     - build.sh
+    - echo "$CI_PROJECT_PATH build done"
