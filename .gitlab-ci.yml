@@ -7,7 +7,16 @@ variables:
   DOCKER_PROJECT_DIST_PATH: $CI_PROJECT_NAME
   MODULE_API_NAME: lark-example-api
 
+build:
+  script:
+    - build.sh
+  artifacts:
+    paths:
+      - target/
+    untracked: true
+    expire_in: 2 hrs
+
 package:
   script:
-    - cd $dir/dist/$MODULE_API_NAME
+    - cd $dir/$MODULE_API_NAME/target
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
