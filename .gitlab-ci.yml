@@ -33,5 +33,6 @@ deploy-dev:
     - chmod +x env-dev.sh
     - ./env-dev.sh
     - echo $SPRING_PROFILE_ACTIVE
+    - echo $PROJECT_NAME
     - cd /root/deploy/
     - deploy.sh $PROJECT_NAME $MODULE_API_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
