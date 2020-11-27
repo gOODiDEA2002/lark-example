@@ -30,8 +30,7 @@ deploy-dev:
   script:
     - export dir=$(pwd)
     - cd $dir/$MODULE_API_NAME
-    - chmod +x env-dev.sh
-    - ./env-dev.sh
+    - for line in $(<env-dev.sh); do echo $line; done
     - echo $SPRING_PROFILE_ACTIVE
     - echo $PROJECT_NAME
     - cd /root/deploy/
