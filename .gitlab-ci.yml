@@ -1,10 +1,13 @@
 include:
   - project: 'devops/ci-templates'
     file: '/build/java.build.gitlab-ci.yml'
+  - project: 'devops/ci-templates'
+    file: '/deploy/java.deploy.gitlab-ci.yml'
 
 variables:
   REGISTRY_ADDRESS: 192.168.99.91:8080
-  DOCKER_PROJECT_DIST_PATH: $CI_PROJECT_NAME
+  REGISTRY_IMAGE_PULL_SECRETS: harbor-registry-secret
+  PROJECT_NAME: $CI_PROJECT_NAME
   MODULE_API_NAME: lark-example-api
 
 build:
@@ -22,3 +25,12 @@ package:
     - export dir=$(pwd)
     - cd $dir/$MODULE_API_NAME
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
+
+deploy-dev:
+  script:
+    - export dir=$(pwd)
+    - cd $dir/$MODULE_API_NAME
+    - chmod +x env-dev.sh
+    - ./env-dev.sh
+    - cd /root/deploy/
+    - deploy.sh $PROJECT_NAME $MODULE_API_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
