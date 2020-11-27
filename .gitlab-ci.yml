@@ -15,11 +15,9 @@ build:
   artifacts:
     paths:
       - $MODULE_API_NAME/target/*.jar
-    expire_in: 1 hrs
+    expire_in: 2 hrs
 
 package:
   script:
     - export dir=$(pwd)
-    - echo $dir/$MODULE_API_NAME/target
-    - cd $dir/$MODULE_API_NAME/target
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
