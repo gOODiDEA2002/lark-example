@@ -39,7 +39,5 @@ deploy-dev:
     - export INGRESS_HOST="api.foo.com"
     - export INGRESS_PATH="/$MODULE_API_NAME"
     - export CONTAINER_PORT="1001"
-    - echo $SPRING_PROFILE_ACTIVE
-    - echo $PROJECT_NAME
     - cd /root/deploy/
     - deploy.sh $PROJECT_NAME $MODULE_API_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
