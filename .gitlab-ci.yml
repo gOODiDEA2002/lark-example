@@ -20,4 +20,5 @@ build:
 package:
   script:
     - export dir=$(pwd)
+    - cd $dir/$MODULE_API_NAME
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
