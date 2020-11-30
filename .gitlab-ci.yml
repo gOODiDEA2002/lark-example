@@ -14,7 +14,7 @@ build:
     - build.sh
   artifacts:
     untracked: true
-    expire_in: 3 hrs
+    expire_in: 2 hrs
 
 package_api:
   variables:
