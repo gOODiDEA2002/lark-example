@@ -8,47 +8,52 @@ variables:
   REGISTRY_ADDRESS: 192.168.99.91:8080
   REGISTRY_IMAGE_PULL_SECRETS: harbor-registry-secret
   PROJECT_NAME: $CI_PROJECT_NAME
-  #App
-  MODULE_API_NAME: lark-example-api
-  MODULE_SERVICE_NAME: lark-example-service
 
 build:
   script:
     - build.sh
   artifacts:
-    paths:
-      - $MODULE_API_NAME/target/*.jar
-      - $MODULE_SERVICE_NAME/target/*.jar
+    untracked: true
     expire_in: 3 hrs
 
-package:
+package_api:
+  variables:
+    MODULE_NAME: lark-example-api
+  extends: .package
   script:
     - export project_dir=$(pwd)
-    # Api
-    - cd /$project_dir/$MODULE_API_NAME
-    - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
-    # Service
-    - cd /$project_dir/$MODULE_SERVICE_NAME
-    - package.sh $MODULE_SERVICE_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
-deploy-dev:
+    - cd /$project_dir/MODULE_NAME
+    - package.sh $MODULE_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
+
+package_service:
+  variables:
+    MODULE_NAME: lark-example-service
+  extends: .package
   script:
-    - export NAMESPACE="lark-ns"
-    - export SPRING_PROFILE_ACTIVE="dev"
-    - export JAVA_OPTS="-server -Xms512m -Xmx512m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError"
-    - export LIVENESS_PROBE="/actuator/health/liveness"
-    - export READINESS_PROBE="/actuator/health/readiness"
-    - export POD_REPLICAS="2"
-    # api
-    - export MODULE_TYPE="api"
-    - export INGRESS_HOST="api.foo.com"
-    - export INGRESS_PATH="/$MODULE_API_NAME"
-    - export CONTAINER_PORT="1001"
+    - export project_dir=$(pwd)
+    - cd /$project_dir/$MODULE_NAME
+    - package.sh $MODULE_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
+
+deploy_dev_api:
+  variables:
+    MODULE_NAME: lark-example-api
+    MODULE_TYPE: api
+    INGRESS_HOST: api.foo.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 1001
+  extends: .deploy_dev
+  script:
     - cd /root/deploy/
-    - deploy.sh $PROJECT_NAME $MODULE_API_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
-    # service
-    - export MODULE_TYPE="service"
-    - export INGRESS_HOST="service.foo.com"
-    - export INGRESS_PATH="/$MODULE_SERVICE_NAME"
-    - export CONTAINER_PORT="3001"
+    - deploy.sh $PROJECT_NAME $MODULE_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
+
+deploy_dev_service:
+  variables:
+    MODULE_NAME: lark-example-service
+    MODULE_TYPE: service
+    INGRESS_HOST: service.foo.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 3001
+  extends: .deploy_dev
+  script:
     - cd /root/deploy/
-    - deploy.sh $PROJECT_NAME $MODULE_SERVICE_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
+    - deploy.sh $PROJECT_NAME $MODULE_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
