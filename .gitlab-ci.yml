@@ -41,7 +41,7 @@ deploy_dev_api:
     INGRESS_HOST: api.foo.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
-  extends: .deploy_dev
+  extends: .deploy-dev
   script:
     - cd /root/deploy/
     - deploy.sh $PROJECT_NAME $MODULE_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
@@ -53,7 +53,7 @@ deploy_dev_service:
     INGRESS_HOST: service.foo.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
-  extends: .deploy_dev
+  extends: .deploy-dev
   script:
     - cd /root/deploy/
     - deploy.sh $PROJECT_NAME $MODULE_NAME $REGISTRY_ADDRESS $REGISTRY_IMAGE_PULL_SECRETS $CI_PROJECT_PATH $COMMIT_SHA
