@@ -7,7 +7,7 @@ server:
 
 ---
 spring:
-  profiles: dev
+  profiles: playground
   cloud:
     nacos:
       discovery:
