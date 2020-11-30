@@ -23,13 +23,12 @@ build:
 
 package:
   script:
+    - export project_dir=$(pwd)
     # Api
-    - export dir=$(pwd)
-    - cd $dir/$MODULE_API_NAME
+    - cd /$project_dir/$MODULE_API_NAME
     - package.sh $MODULE_API_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
     # Service
-    - export dir=$(pwd)
-    - cd $dir/$MODULE_SERVICE_NAME
+    - cd /$project_dir/$MODULE_SERVICE_NAME
     - package.sh $MODULE_SERVICE_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
 deploy-dev:
   script:
