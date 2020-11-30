@@ -22,7 +22,7 @@ package_api:
   extends: .package
   script:
     - export project_dir=$(pwd)
-    - cd /$project_dir/MODULE_NAME
+    - cd /$project_dir/$MODULE_NAME
     - package.sh $MODULE_NAME $REGISTRY_ADDRESS $CI_PROJECT_PATH $COMMIT_SHA
 
 package_service:
