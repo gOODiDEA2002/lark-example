@@ -44,7 +44,6 @@ deplo_api_playground:
     CONTAINER_PORT: 1001
   extends: .deploy-playground
   script:
-    - cd /root/deploy/
     - deploy.sh
 
 deploy_service_playground:
@@ -56,5 +55,4 @@ deploy_service_playground:
     CONTAINER_PORT: 3001
   extends: .deploy-playground
   script:
-    - cd /root/deploy/
     - deploy.sh
