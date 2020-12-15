@@ -35,3 +35,34 @@ rocketmq:
   name-server: 192.168.99.92:9876
   producer:
     group: lark-example-service
+
+---
+spring:
+  profiles: qa
+  cloud:
+    nacos:
+      discovery:
+        server-addr: register-qa.sanqlt.com:8848
+
+  redis:
+    redisson:
+      config: |
+        singleServerConfig:
+          address: redis://cache-00-qa.sanqlt.com:6379
+          password: ScCuWkb0A0MC
+          subscriptionConnectionMinimumIdleSize: 10
+          subscriptionConnectionPoolSize: 50
+          connectionMinimumIdleSize: 10
+          connectionPoolSize: 64
+          database: 0
+
+  datasource:
+    url: jdbc:mysql://db-00-qa.sanqlt.com:3306/techwis-demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: techwis-demo
+    password: ui3q4oPrX2ShO4Ij
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+rocketmq:
+  name-server: mq-00-namesrv-qa:9876
+  producer:
+    group: lark-example-service

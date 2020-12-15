@@ -4,55 +4,45 @@ include:
   - project: 'devops/ci-templates'
     file: '/deploy/java.deploy.gitlab-ci.yml'
 
-variables:
-  REGISTRY_ADDRESS: 192.168.99.91:8080
-  REGISTRY_IMAGE_PULL_SECRETS: harbor-registry-secret
-  PROJECT_NAME: $CI_PROJECT_NAME
-  PROJECT_PATH: $CI_PROJECT_PATH
+build_qa:
+  extends: .build_qa
 
-build:
-  script:
-    - build.sh
-  artifacts:
-    untracked: true
-    expire_in: 2 hrs
-
-package_api:
+package_api_qa:
+  extends: .package_qa
   variables:
     MODULE_NAME: lark-example-api
-  extends: .package
   script:
     - export project_dir=$(pwd)
     - cd /$project_dir/$MODULE_NAME
     - package.sh
 
-package_service:
+package_service_qa:
+  extends: .package_qa
   variables:
     MODULE_NAME: lark-example-service
-  extends: .package
   script:
     - export project_dir=$(pwd)
     - cd /$project_dir/$MODULE_NAME
     - package.sh
 
-deplo_api_playground:
+deploy_api_qa:
+  extends: .deploy-qa
   variables:
     MODULE_NAME: lark-example-api
     MODULE_TYPE: api
-    INGRESS_HOST: api.foo.com
+    INGRESS_HOST: techwis-api-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
-  extends: .deploy-playground
   script:
     - deploy.sh
 
-deploy_service_playground:
+deploy_service_qa:
   variables:
     MODULE_NAME: lark-example-service
     MODULE_TYPE: service
-    INGRESS_HOST: service.foo.com
+    INGRESS_HOST: techwis-service-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
-  extends: .deploy-playground
+  extends: .deploy-qa
   script:
     - deploy.sh

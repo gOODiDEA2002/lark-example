@@ -23,6 +23,10 @@
             <artifactId>lark-example-service-contract</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>lark</groupId>
+            <artifactId>lark-util</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
