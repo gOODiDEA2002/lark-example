@@ -9,20 +9,13 @@ build_sanqlt:
     - .sanqlt
     - .build
 
+#Api
 package_api_sanqlt:
   extends:
     - .sanqlt
     - .package
   variables:
     MODULE_NAME: lark-example-api
-
-package_service_sanqlt:
-  extends:
-    - .sanqlt
-    - .package
-  variables:
-    MODULE_NAME: lark-example-service
-
 
 deploy_api_qa_sanqlt:
   extends:
@@ -34,6 +27,14 @@ deploy_api_qa_sanqlt:
     INGRESS_HOST: techwis-api-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
+
+#Service
+package_service_sanqlt:
+  extends:
+    - .sanqlt
+    - .package
+  variables:
+    MODULE_NAME: lark-example-service
 
 deploy_service_qa_sanqlt:
   extends:
