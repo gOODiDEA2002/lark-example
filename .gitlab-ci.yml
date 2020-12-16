@@ -4,45 +4,44 @@ include:
   - project: 'devops/ci-templates'
     file: '/deploy/java.deploy.gitlab-ci.yml'
 
-build_qa:
-  extends: .build_qa
+build_sanqlt:
+  extends:
+    - .sanqlt
+    - .build
 
-package_api_qa:
-  extends: .package_qa
+package_api_sanqlt:
+  extends:
+    - .sanqlt
+    - .package
   variables:
     MODULE_NAME: lark-example-api
-  script:
-    - export project_dir=$(pwd)
-    - cd /$project_dir/$MODULE_NAME
-    - package.sh
 
-package_service_qa:
-  extends: .package_qa
+package_service_sanqlt:
+  extends:
+    - .sanqlt
+    - .package
   variables:
     MODULE_NAME: lark-example-service
-  script:
-    - export project_dir=$(pwd)
-    - cd /$project_dir/$MODULE_NAME
-    - package.sh
 
-deploy_api_qa:
-  extends: .deploy-qa
+
+deploy_api_qa_sanqlt:
+  extends:
+    - .sanqlt
+    - .deploy_qa
   variables:
     MODULE_NAME: lark-example-api
     MODULE_TYPE: api
     INGRESS_HOST: techwis-api-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
-  script:
-    - deploy.sh
 
-deploy_service_qa:
+deploy_service_qa_sanqlt:
+  extends:
+    - .sanqlt
+    - .deploy_qa
   variables:
     MODULE_NAME: lark-example-service
     MODULE_TYPE: service
     INGRESS_HOST: techwis-service-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
-  extends: .deploy-qa
-  script:
-    - deploy.sh
