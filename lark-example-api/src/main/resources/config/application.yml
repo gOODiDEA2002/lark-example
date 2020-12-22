@@ -63,6 +63,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 rocketmq:
-  name-server: mq-00-namesrv-qa:9876
+  name-server: mq-00-namesrv-qa.sanqlt.com:9876
   producer:
     group: lark-example-service
