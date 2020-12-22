@@ -1,28 +1,28 @@
 package lark.example.service.contract.config;
-
-import lark.net.rpc.ServiceProxy;
 import lark.example.service.contract.iface.TestService;
+import lark.net.rpc.client.ServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
+/**
+ * @author andy
+ */
 @Configuration
-@Lazy
 public class ProxyConfigurer {
-    private final String SERVER = "lark-example-service";
+    private static final String SERVER_NAME = "lark-example-service";
 
-    private ServiceProxy serviceProxy;
+    private final ServiceFactory serviceFactory;
 
     @Autowired
-    public ProxyConfigurer(ServiceProxy serviceProxy) {
-        this.serviceProxy = serviceProxy;
+    public ProxyConfigurer(ServiceFactory serviceFactory) {
+        this.serviceFactory = serviceFactory;
     }
 
     @Bean
     @ConditionalOnMissingBean
     public TestService testService() {
-        return serviceProxy.get(SERVER, TestService.class);
+        return serviceFactory.get(SERVER_NAME, TestService.class);
     }
 }

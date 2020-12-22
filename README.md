@@ -16,7 +16,7 @@ curl --location --request POST 'http://127.0.0.1:3001/test/hello.srv' \
 }'
 
 ###三顷粮田测试环境
-curl --location --request POST 'http://techwis-api-qa.sanqlt.com/lark-example-service/test/hello.srv' \
+curl --location --request POST 'http://techwis-service-qa.sanqlt.com/lark-example-service/test/hello.srv' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "id": 123

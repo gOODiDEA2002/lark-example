@@ -42,7 +42,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: register-qa.sanqlt.com
+        server-addr: register-qa.sanqlt.com:8848
 
   redis:
     redisson:
