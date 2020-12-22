@@ -46,3 +46,4 @@ deploy_service_qa_sanqlt:
     INGRESS_HOST: techwis-service-qa.sanqlt.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
+
