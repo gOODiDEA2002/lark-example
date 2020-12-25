@@ -2,6 +2,7 @@ package lark.example.service;
 
 import lark.service.boot.ServiceApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 public class Bootstrap {

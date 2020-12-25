@@ -57,10 +57,47 @@ spring:
           database: 0
 
   datasource:
-    url: jdbc:mysql://db-00-qa.sanqlt.com:3306/techwis-demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: techwis-demo
-    password: ui3q4oPrX2ShO4Ij
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      user:
+        url: jdbc:mysql://db-00-qa.sanqlt.com:3306/techwis-demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+        username: techwis
+        password: wRcVxyxzJ@gKp4e6dGf.uzLu
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+
+  shardingsphere:
+    props:
+      sql:
+        show: true
+
+    datasource:
+      names: ds0,ds1
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://db-00-qa.sanqlt.com:3306/demo_order_0
+        username: techwis
+        password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://db-00-qa.sanqlt.com:3306/demo_order_1
+        username: techwis
+        password: wRcVxyxzJ@gKp4e6dGf.uzLu
+
+    sharding:
+      tables:
+        t_order:
+          actual-data-nodes: ds$->{0..1}.t_order_$->{0..1}
+          database-strategy:
+            inline:
+              sharding-column: user_id
+              algorithm-expression: ds$->{user_id % 2}
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order_$->{order_id % 2}
+      binding-tables: t_order
 
 rocketmq:
   name-server: mq-00-namesrv-qa.sanqlt.com:9876
