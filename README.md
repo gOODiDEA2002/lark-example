@@ -15,9 +15,21 @@ curl --location --request POST 'http://127.0.0.1:3001/test/hello.srv' \
 "id": 123
 }'
 
+curl --location --request POST 'http://127.0.0.1:3001/test/order/get.srv' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"orderId": 2
+}'
+
 ###三顷粮田测试环境
 curl --location --request POST 'http://techwis-service-qa.sanqlt.com/lark-example-service/test/hello.srv' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "id": 123
+}'
+
+curl --location --request POST 'http://techwis-service-qa.sanqlt.com/lark-example-service/test/order/get.srv' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"orderId": 2
 }'
