@@ -17,7 +17,6 @@ package_api_sanqlt:
   variables:
     MODULE_NAME: lark-example-api
 
-
 deploy_api_qa_sanqlt:
   extends:
     - .sanqlt
