@@ -20,6 +20,9 @@ public class TestController implements TestApi {
     @Override
     public TestVo.HelloResponse hello(TestVo.HelloRequest hello) {
         messageService.send( "TestTopic", 123 );
+        if ( true ) {
+            //test sonar
+        }
         //check
         if ( hello.getId() == 0 ) {
             throw new ApiFaultException( 1000, "ID must >= 0" );
