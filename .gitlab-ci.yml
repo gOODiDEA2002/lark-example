@@ -28,6 +28,7 @@ deploy_api_qa_sanqlt:
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
 
+
 #Service
 package_service_sanqlt:
   extends:
