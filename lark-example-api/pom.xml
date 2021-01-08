@@ -27,6 +27,14 @@
             <groupId>lark</groupId>
             <artifactId>lark-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>lark</groupId>
+            <artifactId>lark-util-index</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lark</groupId>
+            <artifactId>lark-util-oss</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

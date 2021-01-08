@@ -8,6 +8,7 @@ server:
 ---
 spring:
   profiles: playground
+
   cloud:
     nacos:
       discovery:
@@ -39,6 +40,7 @@ rocketmq:
 ---
 spring:
   profiles: qa
+
   cloud:
     nacos:
       discovery:
@@ -66,3 +68,13 @@ rocketmq:
   name-server: mq-00-namesrv-qa.sanqlt.com:9876
   producer:
     group: lark-example-service
+
+lark:
+  util:
+    index:
+      address: es-00-qa.sanqlt.com:9200
+    oss:
+      address: minio-qa.sanqlt.com:80
+      username: minio
+      password: 1O4iE2BGre7R
+      type: minio
