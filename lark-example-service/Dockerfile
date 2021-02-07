@@ -1,4 +1,4 @@
-FROM harbor-dev.sanqlt.com/ci/java-run:1.0.0
+FROM image-repo-dev.lark-cloud.com/ci/java-run:1.0.0
 COPY ./target/*.jar /opt/app.jar
 EXPOSE 3001
 #entrypoint.sh
