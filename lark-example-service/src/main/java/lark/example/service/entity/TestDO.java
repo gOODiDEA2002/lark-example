@@ -5,7 +5,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class TestObject {
+public class TestDO {
     private int id;
     private String name;
 }

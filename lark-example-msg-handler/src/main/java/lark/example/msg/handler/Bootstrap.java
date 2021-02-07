@@ -2,7 +2,6 @@ package lark.example.msg.handler;
 
 import lark.msg.boot.MsgApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /**
  * @author andy
  */

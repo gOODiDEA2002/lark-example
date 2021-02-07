@@ -13,38 +13,16 @@
     <artifactId>lark-example-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <properties>
-        <shardingsphere.version>4.1.1</shardingsphere.version>
-        <druid.version>1.2.4</druid.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>lark</groupId>
             <artifactId>lark-example-service-contract</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!--druid-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <!--ShardingSphere-->
-        <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>${shardingsphere.version}</version>
-        </dependency>
-        <!--MySQL-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -58,22 +36,5 @@
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-            <testResource>
-                <directory>src/main/resources</directory>
-            </testResource>
-        </testResources>
     </build>
 </project>

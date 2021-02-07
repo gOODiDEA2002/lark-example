@@ -1,12 +1,12 @@
 package lark.example.service.dao;
 
+import lark.db.DatabaseService;
 import lark.db.sql.SqlQuery;
-import lark.example.service.entity.Order;
-import lark.example.service.entity.TestObject;
-import lark.example.service.entity.User;
+import lark.example.service.entity.OrderDO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 import static lark.db.sql.SqlHelper.f;
 
@@ -14,11 +14,17 @@ import static lark.db.sql.SqlHelper.f;
 public class OrderDao {
 
     @Autowired
-    @Qualifier("orderSqlQuery")
-    SqlQuery orderSqlQuery;
+    DatabaseService databaseService;
 
-    public Order getOrder(long orderId) {
-        Order order = orderSqlQuery.select( "order_id", "user_id", "sku_id" ).from( "t_order").where( f( "order_id", orderId )).one( Order.class );
-        return order;
+    public OrderDO getOrder(long orderId) {
+        SqlQuery orderSqlQuery = databaseService.getShard( "order" );
+        List<OrderDO> orders = orderSqlQuery.select( "order_id", "user_id", "sku_id" ).
+                from( "order").
+                where( f( "order_id", orderId )).
+                list( OrderDO.class );
+        if ( orders != null && orders.size() > 0 ) {
+            return orders.get(0);
+        }
+        return null;
     }
 }

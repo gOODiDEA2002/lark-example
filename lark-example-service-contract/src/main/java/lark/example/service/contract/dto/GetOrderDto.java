@@ -1,6 +1,5 @@
 package lark.example.service.contract.dto;
 
-import lark.example.service.contract.constant.TestType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

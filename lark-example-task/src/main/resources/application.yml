@@ -4,53 +4,30 @@ spring:
 
 server:
   port: 6001
+---
+spring:
+  config:
+    activate:
+      on-profile: playground
 
 lark:
-  project:
-    type: task
+  registry:
+    address: register-dev.lark-cloud.com:8848
+
+  task:
+    address: http://schedule-dev.lark-cloud.com/xxl-job-admin
+    token: 12345678
 
 ---
 spring:
-  profiles: default
+  config:
+    activate:
+      on-profile: qa
 
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.99.92:8848
+lark:
+  registry:
+    address: register-qa.sanqlt.com:8848
 
-      config:
-        server-addr: 192.168.99.92:8848
-
-  redis:
-    redisson:
-      config: |
-        singleServerConfig:
-          address: redis://192.168.99.92:6379
-          password: 12345678
-          subscriptionConnectionMinimumIdleSize: 10
-          subscriptionConnectionPoolSize: 50
-          connectionMinimumIdleSize: 10
-          connectionPoolSize: 64
-          database: 0
-
-  datasource:
-    url: jdbc:mysql://192.168.99.92:3306/demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: lark
-    password: 12345678
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-xxl:
-  job:
-    admin:
-      addresses: http://127.0.0.1:8280/xxl-job-admin
-    executor:
-      appname: lark-example-task
-      ip: 192.168.0.189
-      port: 9999
-      logpath: /Volumes/andy-ext/log/xxl-job/demo-task
-      logretentiondays: 30
-
-rocketmq:
-  name-server: 192.168.99.92:9876
-  producer:
-    group: lark-example-task
+  task:
+    address: http://xxl-qa.sanqlt.com/xxl-job-admin/
+    token: 12345678

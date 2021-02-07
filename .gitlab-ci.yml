@@ -4,46 +4,83 @@ include:
   - project: 'devops/ci-templates'
     file: '/deploy/java.deploy.gitlab-ci.yml'
 
-build_sanqlt:
+build:
   extends:
-    - .sanqlt
+    - .playground
     - .build
 
 #Api
-package_api_sanqlt:
+package_api:
   extends:
-    - .sanqlt
+    - .playground
     - .package
   variables:
     MODULE_NAME: lark-example-api
 
-deploy_api_qa_sanqlt:
+deploy_api_playground:
   extends:
-    - .sanqlt
-    - .deploy_qa
+    - .playground
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-api
     MODULE_TYPE: api
-    INGRESS_HOST: techwis-api-qa.sanqlt.com
+    INGRESS_HOST: api.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
 
-
 #Service
-package_service_sanqlt:
+package_service:
   extends:
-    - .sanqlt
+    - .playground
     - .package
   variables:
     MODULE_NAME: lark-example-service
 
-deploy_service_qa_sanqlt:
+deploy_service_playground:
   extends:
-    - .sanqlt
+    - .playground
     - .deploy_qa
   variables:
     MODULE_NAME: lark-example-service
     MODULE_TYPE: service
-    INGRESS_HOST: techwis-service-qa.sanqlt.com
+    INGRESS_HOST: service.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
+
+#Msg
+package_msg:
+  extends:
+    - .playground
+    - .package
+  variables:
+    MODULE_NAME: lark-example-msg-handler
+
+deploy_msg_playground:
+  extends:
+    - .playground
+    - .deploy_playground
+  variables:
+    MODULE_NAME: lark-example-msg-handler
+    MODULE_TYPE: msg-handler
+    INGRESS_HOST: handler.lark-cloud.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 5001
+
+#Task
+package_task:
+  extends:
+    - .playground
+    - .package
+  variables:
+    MODULE_NAME: lark-example-task
+
+deploy_task_playground:
+  extends:
+    - .playground
+    - .deploy_playground
+  variables:
+    MODULE_NAME: lark-example-task
+    MODULE_TYPE: task
+    INGRESS_HOST: task.lark-cloud.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 6001

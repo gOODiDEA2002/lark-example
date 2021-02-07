@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class User {
+public class UserDO {
     private int id;
     private int sex;
     private String name;

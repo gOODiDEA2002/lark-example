@@ -1,1 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=lark.example.service.contract.config.ProxyConfigurer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+lark.example.service.contract.config.ServiceAutoConfiguration

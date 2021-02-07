@@ -6,8 +6,8 @@ import lark.example.service.biz.TestBiz;
 import lark.example.service.contract.dto.GetOrderDto;
 import lark.example.service.contract.dto.TestDto;
 import lark.example.service.contract.constant.TestType;
-import lark.example.service.entity.Order;
-import lark.example.service.entity.TestObject;
+import lark.example.service.entity.OrderDO;
+import lark.example.service.entity.TestDO;
 import lark.example.service.contract.iface.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public TestDto.HelloResponse hello(TestDto.HelloRequest request) {
-        TestObject object = testBiz.getObject(request.getId());
+        TestDO object = testBiz.getObject(request.getId());
         TestDto.HelloResponse response = new TestDto.HelloResponse();
         response.setTime(Times.toEpochMilli( LocalDateTime.now().minusDays(-1) ) );
         response.setType(TestType.GOOD);
@@ -43,7 +43,7 @@ public class TestServiceImpl implements TestService {
         //
         long orderId = request.getOrderId();
         LOGGER.info( "request-> orderId:{}", orderId );
-        Order order = orderBiz.getOrder( orderId );
+        OrderDO order = orderBiz.getOrder( orderId );
         if ( order != null ) {
             LOGGER.info( "response-> orderId:{}, userId:{}, skuId:{}", order.getOrderId(), order.getUserId(), order.getSkuId() );
             response.setOrderId( order.getOrderId() );

@@ -25,7 +25,8 @@
         </dependency>
         <dependency>
             <groupId>lark</groupId>
-            <artifactId>lark-util</artifactId>
+            <artifactId>lark-example-msg-contract</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>lark</groupId>
@@ -34,6 +35,14 @@
         <dependency>
             <groupId>lark</groupId>
             <artifactId>lark-util-oss</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lark</groupId>
+            <artifactId>lark-util-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lark</groupId>
+            <artifactId>lark-db</artifactId>
         </dependency>
     </dependencies>
 

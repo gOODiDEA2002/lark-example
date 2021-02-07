@@ -1,9 +1,9 @@
 spring:
   application:
-    name: lark-example-service
+    name: lark-example-api
 
 server:
-  port: 3001
+  port: 1001
 
 ---
 spring:
@@ -14,12 +14,33 @@ spring:
 lark:
   registry:
     address: register-dev.lark-cloud.com:8848
+  msg:
+    address: mq-dev.lark-cloud.com:9876
+    publisher: true
+  util:
+    index:
+      address: index-dev.lark-cloud.com:9200
+    oss:
+      address: oss-dev.lark-cloud.com:80
+      username: minio
+      password: 12345678
+      type: minio
+    cache:
+      address: cache-dev.lark-cloud.com:6379
+      password: 12345678
   db:
     source:
       - user_master
+      - user_slave
       - order_master_0
       - order_master_1
     user_master:
+      name: demo
+      address: db-dev.lark-cloud.com:3306
+      username: lark
+      password: 12345678
+      type: mysql
+    user_slave:
       name: demo
       address: db-dev.lark-cloud.com:3306
       username: lark
@@ -46,6 +67,7 @@ lark:
       table-sharding:
         column: order_id
         algorithm: t_order_$->{order_id % 2}
+
 ---
 spring:
   config:
@@ -55,12 +77,33 @@ spring:
 lark:
   registry:
     address: register-qa.sanqlt.com:8848
+  msg:
+    address: mq-00-namesrv-qa.sanqlt.com:9876
+    publisher: true
+  util:
+    index:
+      address: es-00-qa.sanqlt.com:9200
+    oss:
+      address: minio-qa.sanqlt.com:80
+      username: minio
+      password: 1O4iE2BGre7R
+      type: minio
+    cache:
+      address: cache-00-qa.sanqlt.com:6379
+      password: ScCuWkb0A0MC
   db:
     source:
       - user_master
+      - user_slave
       - ds0
       - ds1
     user_master:
+      name: techwis-demo
+      address: db-00-qa.sanqlt.com:3306
+      username: techwis
+      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      type: mysql
+    user_slave:
       name: techwis-demo
       address: db-00-qa.sanqlt.com:3306
       username: techwis
