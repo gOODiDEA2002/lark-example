@@ -9,7 +9,43 @@ build:
     - .playground
     - .build
 
+#Api
+package_api:
+  extends:
+    - .playground
+    - .package
+  variables:
+    MODULE_NAME: lark-example-api
 
+deploy_api_playground:
+  extends:
+    - .playground
+    - .deploy_playground
+  variables:
+    MODULE_NAME: lark-example-api
+    MODULE_TYPE: api
+    INGRESS_HOST: api.lark-cloud.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 1001
+
+#Service
+package_service:
+  extends:
+    - .playground
+    - .package
+  variables:
+    MODULE_NAME: lark-example-service
+
+deploy_service_playground:
+  extends:
+    - .playground
+    - .deploy_qa
+  variables:
+    MODULE_NAME: lark-example-service
+    MODULE_TYPE: service
+    INGRESS_HOST: service.lark-cloud.com
+    INGRESS_PATH: /$MODULE_NAME
+    CONTAINER_PORT: 3001
 
 #Msg
 package_msg:
