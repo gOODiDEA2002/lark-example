@@ -39,7 +39,7 @@ package_service:
 deploy_service_playground:
   extends:
     - .playground
-    - .deploy_qa
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-service
     MODULE_TYPE: service
