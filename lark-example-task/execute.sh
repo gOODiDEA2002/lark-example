@@ -14,4 +14,4 @@ curl --location --request POST $url \
         "executorParams": "",
         "logId": 1,
         "logDateTime":1586629003729
-}'cd
+}'
