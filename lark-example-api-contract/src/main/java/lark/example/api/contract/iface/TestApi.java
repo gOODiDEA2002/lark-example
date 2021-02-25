@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/test")
 @Api(tags="测试接口")
@@ -15,5 +17,5 @@ public interface TestApi {
     @ApiOperation("Hello")
     @ApiResponse(responseCode="200", description="Hello")
     @PostMapping("/hello.api")
-    public HelloResponse hello(@ApiParam("HelloRequest") HelloRequest hello );
+    public HelloResponse hello(@ApiParam("HelloRequest") HelloRequest hello ) throws IOException;
 }

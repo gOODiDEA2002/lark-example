@@ -2,11 +2,8 @@ package lark.example.msg.handler.executor;
 
 import lark.example.msg.contract.handler.OrderCreateHandler;
 import lark.example.msg.contract.message.OrderMessage;
-import lark.example.msg.contract.topic.OrderTopic;
 import lark.example.msg.handler.biz.TestBiz;
-import lark.msg.Handler;
 import lark.msg.Message;
-import lark.msg.MsgHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

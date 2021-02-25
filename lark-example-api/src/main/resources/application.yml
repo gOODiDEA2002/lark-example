@@ -21,7 +21,7 @@ lark:
     index:
       address: index-dev.lark-cloud.com:9200
     oss:
-      address: oss-dev.lark-cloud.com:80
+      address: oss-dev.lark-cloud.com
       username: minio
       password: 12345678
       type: minio
@@ -84,7 +84,7 @@ lark:
     index:
       address: es-00-qa.sanqlt.com:9200
     oss:
-      address: minio-qa.sanqlt.com:80
+      address: minio-qa.sanqlt.com
       username: minio
       password: 1O4iE2BGre7R
       type: minio

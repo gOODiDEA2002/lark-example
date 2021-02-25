@@ -3,8 +3,6 @@ package lark.example.msg.contract.publisher;
 import lark.example.msg.contract.message.OrderMessage;
 import lark.example.msg.contract.topic.OrderTopic;
 import lark.msg.Publisher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Andy Yuan on 2020/10/30.

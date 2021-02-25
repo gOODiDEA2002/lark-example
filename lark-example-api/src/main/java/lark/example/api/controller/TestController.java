@@ -16,6 +16,7 @@ import lark.msg.Publisher;
 import lark.util.cache.CacheService;
 import lark.util.cache.LockService;
 import lark.util.cache.RateLimitService;
+import lark.util.oss.OssService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -66,7 +70,7 @@ public class TestController implements TestApi {
     DatabaseService databaseService;
 
     @Override
-    public TestVo.HelloResponse hello(TestVo.HelloRequest hello) {
+    public TestVo.HelloResponse hello(TestVo.HelloRequest hello) throws IOException {
         SqlQuery sqlQuery = databaseService.get( "user_master" );
         User dbuser = sqlQuery.select("id", "name" )
                 .from( "users" )
