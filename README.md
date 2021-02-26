@@ -25,34 +25,62 @@ java -jar lark-example-service/target/lark-example-service-1.0.0-SNAPSHOT.jar --
 ```
 * 本地访问
 ```bash
-curl --location --request POST 'http://127.0.0.1:3001/test/hello.srv' \
+curl --location --request POST 'http://127.0.0.1:3001/lark/TestService/Hello' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"id": 123
+	"service": "TestService",
+	"method": "Hello",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"id\":123,\"type\":\"GOOD\"}"
+		}
+	]
 }'
 ```
 ```bash
-curl --location --request POST 'http://127.0.0.1:3001/test/order/get.srv' \
+curl --location --request POST 'http://127.0.0.1:3001/lark/TestService/getOrder' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"orderId": 2
+	"service": "TestService",
+	"method": "getOrder",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"orderId\":2}"
+		}
+	]
 }'
 ```
 
 * Playground环境访问
 ```bash
-curl --location --request POST 'http://service.lark-cloud.com/lark-example-service/test/hello.srv' \
+curl --location --request POST 'http://service.lark-cloud.com/lark-example-service/lark/TestService/Hello' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"id": 123
+	"service": "TestService",
+	"method": "Hello",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"id\":123,\"type\":\"GOOD\"}"
+		}
+	]
 }'
 ```
 
 ```bash
-curl --location --request POST 'http://service.lark-cloud.com/lark-example-service/test/order/get.srv' \
+curl --location --request POST 'http://service.lark-cloud.com/lark-example-service/lark/TestService/getOrder' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"orderId": 2
+	"service": "TestService",
+	"method": "getOrder",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"orderId\":2}"
+		}
+	]
 }'
 ```
 
