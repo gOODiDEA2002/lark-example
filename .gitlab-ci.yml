@@ -66,6 +66,7 @@ deploy_msg_playground:
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 5001
 
+
 #Task
 package_task:
   extends:
