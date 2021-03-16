@@ -1,14 +1,13 @@
 package lark.example.service.dao;
 
 import lark.db.DatabaseService;
-import lark.db.sql.SqlQuery;
+import lark.db.jsd.Database;
 import lark.example.service.entity.TestDO;
 import lark.example.service.entity.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import static lark.db.sql.SqlHelper.f;
+import static lark.db.jsd.Shortcut.f;
 
 @Repository
 public class TestDao {
@@ -17,11 +16,11 @@ public class TestDao {
     DatabaseService databaseService;
 
     public TestDO getObject(int id) {
-        SqlQuery userSqlQuery = databaseService.get( "user_master" );
+        Database userSqlQuery = databaseService.get( "user_master" );
         UserDO user = userSqlQuery.select("id", "name" )
                 .from( "users" )
                 .where( f( "id", id ) )
-                .one( UserDO.class );
+                .result().one( UserDO.class );
         //
         TestDO object = new TestDO();
         if ( user != null ) {

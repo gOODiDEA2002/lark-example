@@ -1,8 +1,7 @@
-import static lark.db.sql.SqlHelper.f;
-import static lark.db.sql.SqlHelper.t;
 
-import lark.db.sql.InsertResult;
-import lark.db.sql.SqlQuery;
+import lark.db.DatabaseService;
+import lark.db.jsd.Database;
+import lark.db.jsd.result.InsertResult;
 import lark.example.service.Bootstrap;
 import lark.example.service.dao.TestDao;
 import lark.example.service.entity.TestDO;
@@ -20,6 +19,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
+import static lark.db.jsd.Shortcut.f;
+
+
 @RunWith(SpringRunner.class )
 @SpringBootTest(classes = {Bootstrap.class})
 @ActiveProfiles("qa")
@@ -28,8 +30,7 @@ public class MySQLTest {
     TestDao dao;
 
     @Autowired
-    @Qualifier("orderSqlQuery")
-    SqlQuery orderSqlQuery;
+    DatabaseService databaseService;
 
     @Autowired
     DataSource shardingDataSource;
@@ -37,26 +38,12 @@ public class MySQLTest {
 
     @Test
     public void test() throws IOException, SQLException {
-//        File configFile = ResourceUtils.getFile("classpath:database.order.config.yml");
-//        DataSource dataSource = YamlShardingDataSourceFactory.createDataSource( configFile );
-//        try (Connection connection = dataSource.getConnection();
-//        try (Connection connection = shardingDataSource.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
-//            preparedStatement.setLong(1, 1);
-//            preparedStatement.setLong(2, 1);
-//            preparedStatement.setInt(3, 1);
-//            int ir = preparedStatement.executeUpdate();
-//            System.console().printf( "result:%s", ir );
-//        } catch (SQLException sqlException ) {
-//            sqlException.printStackTrace();
-//        }
-        //
-        //
-        Map<String, Object> selectResult = orderSqlQuery.select( "order_id", "user_id" ).from( "t_order").where( f( "order_id", 2 )).one();
+        Database orderSqlQuery = databaseService.get( "order" );
+        Map<String, Object> selectResult = orderSqlQuery.select( "order_id", "user_id" ).from( "t_order").where( f( "order_id", 2 )).result().one();
         if ( selectResult != null ) {
             System.out.printf("{ select %s}", selectResult.toString());
         }
-        int dr = orderSqlQuery.delete( "t_order", f( "order_id", 2 ) );
+        int dr = orderSqlQuery.delete( "t_order" ).where( f("order_id", 2 ) ).result().getAffectedRows();
         System.out.printf("{ delete affectedRows: %d}%n", dr );
         //
         InsertResult result = orderSqlQuery.insert( "t_order" ).columns( "order_id", "user_id", "sku_id" ).values(2,2,2).result();

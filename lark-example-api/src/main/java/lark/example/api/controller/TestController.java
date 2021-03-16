@@ -1,10 +1,9 @@
 package lark.example.api.controller;
 
 import lark.api.response.ApiFaultException;
-import lark.core.lang.ProcessHandle;
 import lark.core.util.Strings;
 import lark.db.DatabaseService;
-import lark.db.sql.SqlQuery;
+import lark.db.jsd.Database;
 import lark.example.api.biz.TestBiz;
 import lark.example.api.contract.iface.TestApi;
 import lark.example.api.contract.vo.TestVo;
@@ -16,7 +15,6 @@ import lark.msg.Publisher;
 import lark.util.cache.CacheService;
 import lark.util.cache.LockService;
 import lark.util.cache.RateLimitService;
-import lark.util.oss.OssService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -25,13 +23,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static lark.db.sql.SqlHelper.f;
+import static lark.db.jsd.Shortcut.f;
 
 
 
@@ -71,16 +67,15 @@ public class TestController implements TestApi {
 
     @Override
     public TestVo.HelloResponse hello(TestVo.HelloRequest hello) throws IOException {
-        SqlQuery sqlQuery = databaseService.get( "user_master" );
-        User dbuser = sqlQuery.select("id", "name" )
+        Database db = databaseService.get( "user_master" );
+        User dbuser = db.select("id", "name" )
                 .from( "users" )
-                .where( f( "id", 123 ) )
-                .one( User.class );
+                .where( f( "id", 123 ) ).result().one( User.class );
         LOGGER.info( "DB User: >>> id: {}", dbuser.getId() );
         //
         long shardOrderId = 2;
-        sqlQuery = databaseService.getShard( "order" );
-        Order order = sqlQuery.select( "order_id", "user_id", "sku_id" ).from( "order").where( f( "order_id", shardOrderId )).one( Order.class );
+        db = databaseService.getShard( "order" );
+        Order order = db.select( "order_id", "user_id", "sku_id" ).from( "order").where( f( "order_id", shardOrderId )).result().one( Order.class );
         LOGGER.info( "DB Order: >>> id: {}", order.getUserId() );
         /*
         测试消息服务

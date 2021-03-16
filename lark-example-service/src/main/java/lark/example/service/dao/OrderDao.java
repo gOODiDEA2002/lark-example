@@ -1,14 +1,14 @@
 package lark.example.service.dao;
 
 import lark.db.DatabaseService;
-import lark.db.sql.SqlQuery;
+import lark.db.jsd.Database;
 import lark.example.service.entity.OrderDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static lark.db.sql.SqlHelper.f;
+import static lark.db.jsd.Shortcut.f;
 
 @Repository
 public class OrderDao {
@@ -17,11 +17,12 @@ public class OrderDao {
     DatabaseService databaseService;
 
     public OrderDO getOrder(long orderId) {
-        SqlQuery orderSqlQuery = databaseService.getShard( "order" );
+        Database orderSqlQuery = databaseService.getShard( "order" );
         List<OrderDO> orders = orderSqlQuery.select( "order_id", "user_id", "sku_id" ).
                 from( "order").
                 where( f( "order_id", orderId )).
-                list( OrderDO.class );
+                result().
+                all( OrderDO.class );
         if ( orders != null && orders.size() > 0 ) {
             return orders.get(0);
         }
