@@ -8,4 +8,5 @@ import lombok.*;
 public class TestDO {
     private int id;
     private String name;
+    private String description;
 }

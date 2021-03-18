@@ -34,7 +34,7 @@ public class TestServiceImpl implements TestService {
         TestDto.HelloResponse response = new TestDto.HelloResponse();
         response.setTime(Times.toEpochMilli( LocalDateTime.now().minusDays(-1) ) );
         response.setType(TestType.GOOD);
-        response.setResult(object.getName());
+        response.setResult( String.format( "name:%s, desc:%s", object.getName(), object.getDescription() ) );
         //
         return response;
     }
