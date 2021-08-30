@@ -1,6 +1,4 @@
 FROM image-repo-dev.alzjqr.cn/ci/java-run:1.0.0
-cd ./target/
-ll -l
 COPY ./target/*.jar /opt/app.jar
 EXPOSE 1001
 #entrypoint.sh
