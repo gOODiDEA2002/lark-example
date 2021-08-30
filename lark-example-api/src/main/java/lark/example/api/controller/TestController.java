@@ -91,7 +91,7 @@ public class TestController implements TestApi {
         /*
         测试缓存服务
          */
-        cacheService.set( "test", "123", Duration.ofMinutes(3));
+        cacheService.set( "test", "123", Duration.ZERO);
         String v = cacheService.get( "test" );
         LOGGER.info( "Test Cache: >>> test: {}", v );
         UserItem item = new UserItem();
