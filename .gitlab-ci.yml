@@ -20,7 +20,6 @@ package_api:
   script:
     - export project_dir=$(pwd)
     - cd $project_dir/$MODULE_FOLDER_NAME
-    - ll
     - ls -l
     - package.sh
 
