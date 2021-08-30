@@ -6,66 +6,66 @@ include:
 
 build:
   extends:
-    - .qa
+    - .playground
     - .build
 
 #Api
 package_api:
   extends:
-    - .qa
+    - .playground
     - .package
   variables:
     MODULE_FOLDER_NAME: lark-example-api
     MODULE_NAME: lark-example-api
 
-deploy_api_qa:
+deploy_api_playground:
   extends:
-    - .qa
-    - .deploy_qa
+    - .playground
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-api
     MODULE_TYPE: api
-    INGRESS_HOST: api-qa.alzjqr.cn
+    INGRESS_HOST: api.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 1001
 
 #Service
 package_service:
   extends:
-    - .qa
+    - .playground
     - .package
   variables:
     MODULE_FOLDER_NAME: lark-example-service
     MODULE_NAME: lark-example-service
 
-deploy_service_qa:
+deploy_service_playground:
   extends:
     - .playground
-    - .deploy_qa
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-service
     MODULE_TYPE: service
-    INGRESS_HOST: service-qa.alzjqr.cn
+    INGRESS_HOST: service.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 3001
 
 #Msg
 package_msg:
   extends:
-    - .qa
+    - .playground
     - .package
   variables:
     MODULE_FOLDER_NAME: lark-example-msg-handler
     MODULE_NAME: lark-example-msg-handler
 
-deploy_msg_qa:
+deploy_msg_playground:
   extends:
-    - .qa
-    - .deploy_qa
+    - .playground
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-msg-handler
     MODULE_TYPE: msg-handler
-    INGRESS_HOST: handler-qa.alzjqr.cn
+    INGRESS_HOST: handler.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 5001
 
@@ -73,19 +73,19 @@ deploy_msg_qa:
 #Task
 package_task:
   extends:
-    - .qa
+    - .playground
     - .package
   variables:
     MODULE_FOLDER_NAME: lark-example-task
     MODULE_NAME: lark-example-task
 
-deploy_task_qa:
+deploy_task_playground:
   extends:
-    - .qa
-    - .deploy_qa
+    - .playground
+    - .deploy_playground
   variables:
     MODULE_NAME: lark-example-task
     MODULE_TYPE: task
-    INGRESS_HOST: task-qa.alzjqr.cn
+    INGRESS_HOST: task.lark-cloud.com
     INGRESS_PATH: /$MODULE_NAME
     CONTAINER_PORT: 6001

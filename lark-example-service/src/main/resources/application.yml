@@ -54,36 +54,36 @@ spring:
 
 lark:
   registry:
-    address: register-qa.sanqlt.com:8848
+    address: register-qa.alzjqr.cn:8848
   db:
     source:
       - user_master
-      - ds0
-      - ds1
+      - order_master_0
+      - order_master_1
     user_master:
-      name: techwis-demo
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      name: demo
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
       type: mysql
-    ds0:
+    order_master_0:
       name: demo_order_0
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
-    ds1:
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
+    order_master_1:
       name: demo_order_1
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
     shard:
-      - t_order
-    t_order:
-      database: ds0, ds1
-      route: ds$->{0..1}.t_order_$->{0..1}
+      - order
+    order:
+      database: order_master_0, order_master_1
+      route: order_master_$->{0..1}.t_order_$->{0..1}
       database-sharding:
         column: user_id
-        algorithm: ds$->{user_id % 2}
+        algorithm: order_master_$->{user_id % 2}
       table-sharding:
         column: order_id
         algorithm: t_order_$->{order_id % 2}
