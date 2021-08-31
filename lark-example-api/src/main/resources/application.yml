@@ -76,57 +76,57 @@ spring:
 
 lark:
   registry:
-    address: register-qa.sanqlt.com:8848
+    address: register-qa.alzjqr.cn:8848
   msg:
-    address: mq-00-namesrv-qa.sanqlt.com:9876
+    address: mq-qa.alzjqr.cn:9876
     publisher: true
   util:
     index:
-      address: es-00-qa.sanqlt.com:9200
+      address: es-qa.alzjqr.cn:9200
     oss:
-      address: minio-qa.sanqlt.com
+      address: oss-qa.alzjqr.cn
       username: minio
-      password: 1O4iE2BGre7R
+      password: 12345678
       type: minio
     cache:
-      address: cache-00-qa.sanqlt.com:6379
-      password: ScCuWkb0A0MC
+      address: cache-qa.alzjqr.cn:6379
+      #password: qwe123
   db:
     source:
       - user_master
       - user_slave
-      - ds0
-      - ds1
+      - order_master_0
+      - order_master_1
     user_master:
-      name: techwis-demo
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      name: demo
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
       type: mysql
     user_slave:
-      name: techwis-demo
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      name: demo
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
       type: mysql
-    ds0:
+    order_master_0:
       name: demo_order_0
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
-    ds1:
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
+    order_master_1:
       name: demo_order_1
-      address: db-00-qa.sanqlt.com:3306
-      username: techwis
-      password: wRcVxyxzJ@gKp4e6dGf.uzLu
+      address: db-qa.alzjqr.cn:3306
+      username: root
+      password: root
     shard:
-      - t_order
-    t_order:
-      database: ds0, ds1
-      route: ds$->{0..1}.t_order_$->{0..1}
+      - order
+    order:
+      database: order_master_0, order_master_1
+      route: order_master_$->{0..1}.t_order_$->{0..1}
       database-sharding:
         column: user_id
-        algorithm: ds$->{user_id % 2}
+        algorithm: order_master_$->{user_id % 2}
       table-sharding:
         column: order_id
         algorithm: t_order_$->{order_id % 2}

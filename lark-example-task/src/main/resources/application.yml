@@ -26,8 +26,8 @@ spring:
 
 lark:
   registry:
-    address: register-qa.sanqlt.com:8848
+    address: register-qa.alzjqr.cn:8848
 
   task:
-    address: http://xxl-qa.sanqlt.com/xxl-job-admin/
+    address: http://task-console-qa.alzjqr.cn/
     token: 12345678

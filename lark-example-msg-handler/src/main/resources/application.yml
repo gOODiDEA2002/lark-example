@@ -18,3 +18,17 @@ lark:
   msg:
     address: mq-dev.lark-cloud.com:9876
     subscriber: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+
+lark:
+  registry:
+    address: register-qa.alzjqr.cn:8848
+
+  msg:
+    address: mq-qa.alzjqr.cn:9876
+    subscriber: true
