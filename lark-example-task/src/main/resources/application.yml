@@ -29,5 +29,5 @@ lark:
     address: register-qa.alzjqr.cn:8848
 
   task:
-    address: http://task-console-qa.alzjqr.cn/
+    address: http://task-console-qa.alzjqr.cn/xxl-job-admin
     token: 12345678
