@@ -8,7 +8,6 @@ build:
   extends:
     - .qa
     - .build
-
 #Api
 package_api:
   extends:
