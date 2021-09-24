@@ -17,11 +17,17 @@ curl -X POST "http://127.0.0.1:1001/test/hello.api" -d "id=123&name=xxx"
 curl -X POST "http://api.lark-cloud.com/lark-example-api/test/hello.api" -d "id=123&name=xxx"
 ```
 
+* QA环境访问
+```bash
+curl -X POST "https://api-qa.alzjqr.cn/lark-example-api/test/hello.api" -d "id=123&name=xxx"
+```
+
 ## Service
 
 * 本地启动
 ```bash
 java -jar lark-example-service/target/lark-example-service-1.0.0-SNAPSHOT.jar --spring.profiles.active=playground
+java -jar lark-example-service/target/lark-example-service-1.0.0-SNAPSHOT.jar --spring.profiles.active=qa
 ```
 * 本地访问
 ```bash
@@ -71,6 +77,36 @@ curl --location --request POST 'http://service.lark-cloud.com/lark-example-servi
 
 ```bash
 curl --location --request POST 'http://service.lark-cloud.com/lark-example-service/lark/TestService/getOrder' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"service": "TestService",
+	"method": "getOrder",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"orderId\":2}"
+		}
+	]
+}'
+```
+* QA环境访问
+```bash
+curl --location --request POST 'http://service-qa.alzjqr.cn/lark-example-service/lark/TestService/Hello' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"service": "TestService",
+	"method": "Hello",
+	"args": [
+		{
+			"type": 150,
+			"data": "{\"id\":123,\"type\":\"GOOD\"}"
+		}
+	]
+}'
+```
+
+```bash
+curl --location --request POST 'http://service-qa.alzjqr.cn/lark-example-service/lark/TestService/getOrder' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"service": "TestService",

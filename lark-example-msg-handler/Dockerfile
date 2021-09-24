@@ -1,4 +1,4 @@
-FROM image-repo-dev.alzjqr.cn/ci/java-run:1.0.0
+FROM goodidea2002/ci:java-run
 COPY ./target/*.jar /opt/app.jar
 EXPOSE 5001
 #entrypoint.sh
