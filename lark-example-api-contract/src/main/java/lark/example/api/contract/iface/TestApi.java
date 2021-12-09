@@ -1,21 +1,24 @@
 package lark.example.api.contract.iface;
 
-import lark.example.api.contract.vo.TestVo.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lark.example.api.contract.vo.TestVo.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/test")
-@Api(tags="测试接口")
+@RequestMapping("/v1/test")
+@Tag(name = "测试接口")
 public interface TestApi {
 
-    @ApiOperation("Hello")
-    @ApiResponse(responseCode="200", description="Hello")
+    @Operation(summary="Hello")
+    @ApiResponse(responseCode="200", description="Hello", content = @Content( schema = @Schema( implementation = HelloResponse.class )) )
     @PostMapping("/hello.api")
-    public HelloResponse hello(@ApiParam("HelloRequest") HelloRequest hello ) throws IOException;
+    public HelloResponse hello(@Parameter(schema=@Schema( implementation = HelloRequest.class ) )
+                                           HelloRequest hello ) throws IOException;
 }

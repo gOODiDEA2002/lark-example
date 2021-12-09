@@ -5,6 +5,7 @@
 * 本地启动
 ```bash
 java -jar lark-example-api/target/lark-example-api-1.0.0-SNAPSHOT.jar --spring.profiles.active=playground
+java -jar lark-example-api/target/lark-example-api-1.0.0-SNAPSHOT.jar --spring.profiles.active=qa
 ```
 
 * 本地访问
@@ -125,6 +126,7 @@ curl --location --request POST 'http://service-qa.alzjqr.cn/lark-example-service
 * 本地启动
 ```bash
 java -jar lark-example-task/target/lark-example-task-1.0.0-SNAPSHOT.jar --spring.profiles.active=playground
+java -jar lark-example-task/target/lark-example-task-1.0.0-SNAPSHOT.jar --spring.profiles.active=qa
 ```
 
 * 本地访问
@@ -168,6 +170,7 @@ curl --location --request POST $url \
 * 本地启动
 ```bash
 java -jar lark-example-msg-handler/target/lark-example-msg-handler-1.0.0-SNAPSHOT.jar --spring.profiles.active=playground
+java -jar lark-example-msg-handler/target/lark-example-msg-handler-1.0.0-SNAPSHOT.jar --spring.profiles.active=qa
 ```
 
 * 本地访问
