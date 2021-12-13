@@ -6,19 +6,19 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lark.api.web.ApiRestController;
 import lark.example.api.contract.vo.TestVo.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@RestController
-@RequestMapping("/v1/test")
 @Tag(name = "测试接口")
+@ApiRestController
 public interface TestApi {
 
     @Operation(summary="Hello")
     @ApiResponse(responseCode="200", description="Hello", content = @Content( schema = @Schema( implementation = HelloResponse.class )) )
-    @PostMapping("/hello.api")
+    @PostMapping("/v1/test/hello.api")
     public HelloResponse hello(@Parameter(schema=@Schema( implementation = HelloRequest.class ) )
                                            HelloRequest hello ) throws IOException;
 }

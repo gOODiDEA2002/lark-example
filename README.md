@@ -8,6 +8,11 @@ java -jar lark-example-api/target/lark-example-api-1.0.0-SNAPSHOT.jar --spring.p
 java -jar lark-example-api/target/lark-example-api-1.0.0-SNAPSHOT.jar --spring.profiles.active=qa
 ```
 
+* 文档
+```
+http://127.0.0.1:1001/swagger-ui.html
+```
+
 * 本地访问
 ```bash
 curl -X POST "http://127.0.0.1:1001/test/hello.api" -d "id=123&name=xxx"
@@ -15,7 +20,7 @@ curl -X POST "http://127.0.0.1:1001/test/hello.api" -d "id=123&name=xxx"
 
 * Playground环境访问
 ```bash
-curl -X POST "http://api.lark-cloud.com/lark-example-api/test/hello.api" -d "id=123&name=xxx"
+curl -X POST "http://api.lark-cloud.com/lark-example-api/lark/v1/test/hello.api" -d "id=123&name=xxx"
 ```
 
 * QA环境访问

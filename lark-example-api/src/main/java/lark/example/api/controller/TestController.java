@@ -1,6 +1,7 @@
 package lark.example.api.controller;
 
 import lark.api.response.ApiFaultException;
+import lark.api.web.ApiRestController;
 import lark.core.util.Strings;
 import lark.db.DatabaseService;
 import lark.db.jsd.Database;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -29,9 +31,7 @@ import java.time.LocalDateTime;
 
 import static lark.db.jsd.Shortcut.f;
 
-
-
-@RestController
+@ApiRestController
 public class TestController implements TestApi {
 
     @Data
