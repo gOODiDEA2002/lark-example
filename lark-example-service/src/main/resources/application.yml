@@ -52,6 +52,20 @@ spring:
     activate:
       on-profile: qa
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram.http.server.requests: true
+    percentiles:
+      http.server.requests: 0.95, 0.99
+      sla.http.server.requests: 200ms
+    tags:
+      application: ${spring.application.name}
+
 lark:
   registry:
     address: register-qa.alzjqr.cn:8848

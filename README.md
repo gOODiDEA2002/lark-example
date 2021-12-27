@@ -15,17 +15,17 @@ http://127.0.0.1:1001/swagger-ui.html
 
 * 本地访问
 ```bash
-curl -X POST "http://127.0.0.1:1001/test/hello.api" -d "id=123&name=xxx"
+curl -X POST "http://127.0.0.1:1001/api/v1/test/hello.api" -d "id=123&name=xxx"
 ```
 
 * Playground环境访问
 ```bash
-curl -X POST "http://api.lark-cloud.com/lark-example-api/lark/v1/test/hello.api" -d "id=123&name=xxx"
+curl -X POST "http://api.lark-cloud.com/lark-example-api/api/v1/test/hello.api" -d "id=123&name=xxx"
 ```
 
 * QA环境访问
 ```bash
-curl -X POST "https://api-qa.alzjqr.cn/lark-example-api/test/hello.api" -d "id=123&name=xxx"
+curl -X POST "https://api-qa.alzjqr.cn/lark-example-api/api/v1/test/hello.api" -d "id=123&name=xxx"
 ```
 
 ## Service
